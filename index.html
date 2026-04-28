@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BATIST | Puspa Shahi</title>
+  <meta name="description" content="BATIST - Cybersecurity student portfolio focused on offensive security, bug hunting, Linux, and web security." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #050008;
+      --panel: rgba(17, 8, 28, 0.82);
+      --purple: #9d50bb;
+      --purple-2: #6e2a91;
+      --green: #00ff66;
+      --text: #f5eaff;
+      --muted: #bda9c9;
+      --border: rgba(157, 80, 187, 0.45);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #1a0526 0%, #050008 45%, #000 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(157, 80, 187, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 80, 187, 0.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.18) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0.22;
+    }
+
+    .glow {
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      background: var(--purple);
+      filter: blur(160px);
+      opacity: 0.22;
+      border-radius: 50%;
+      z-index: -1;
+      animation: floatGlow 8s infinite alternate ease-in-out;
+    }
+
+    .glow.one { top: -120px; left: -120px; }
+    .glow.two { bottom: -140px; right: -100px; animation-delay: 2s; }
+
+    @keyframes floatGlow {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(60px, 40px) scale(1.15); }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 0, 8, 0.74);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Fira Code', monospace;
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+      text-shadow: 0 0 10px var(--green);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 140px 8% 80px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .tag {
+      font-family: 'Fira Code', monospace;
+      color: var(--green);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3.4rem, 9vw, 8rem);
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -5px;
+      text-shadow: 0 0 30px rgba(157, 80, 187, 0.75);
+      animation: glitch 3s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 92%, 100% { transform: none; text-shadow: 0 0 30px rgba(157, 80, 187, 0.75); }
+      93% { transform: skew(-3deg); text-shadow: -3px 0 #00ff66, 3px 0 #9d50bb; }
+      94% { transform: skew(3deg); }
+      95% { transform: none; }
+    }
+
+    .subtitle {
+      margin-top: 22px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    .typing {
+      margin-top: 26px;
+      width: fit-content;
+      font-family: 'Fira Code', monospace;
+      color: var(--green);
+      border-right: 2px solid var(--green);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(42) infinite alternate, blink 0.7s infinite;
+    }
+
+    @keyframes typing { from { width: 0; } to { width: 31ch; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(157, 80, 187, 0.12);
+      text-decoration: none;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      box-shadow: 0 0 24px rgba(157, 80, 187, 0.45);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 28px rgba(0, 255, 102, 0.25);
+      border-color: var(--green);
+    }
+
+    .terminal {
+      background: rgba(0, 0, 0, 0.64);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(157, 80, 187, 0.23);
+      animation: terminalFloat 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes terminalFloat {
+      from { transform: translateY(0); }
+      to { transform: translateY(-16px); }
+    }
+
+    .terminal-top {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      background: rgba(157, 80, 187, 0.16);
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    .terminal-body {
+      padding: 24px;
+      font-family: 'Fira Code', monospace;
+      color: var(--green);
+      line-height: 1.9;
+      font-size: 0.95rem;
+    }
+
+    .terminal-body span { color: var(--muted); }
+
+    section {
+      padding: 90px 8%;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+
+    .section-title span { color: var(--green); }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.8;
+      margin-bottom: 34px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 26px;
+      border-radius: 22px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(157, 80, 187, 0.18), transparent);
+      transition: 0.6s;
+    }
+
+    .card:hover::before { left: 100%; }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--green);
+      box-shadow: 0 0 28px rgba(157, 80, 187, 0.28);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--green);
+      background: rgba(0, 255, 102, 0.06);
+    }
+
+    .contact-box {
+      text-align: center;
+      max-width: 780px;
+      margin: auto;
+      background: linear-gradient(135deg, rgba(157, 80, 187, 0.22), rgba(0, 255, 102, 0.06));
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 44px;
+      box-shadow: 0 0 35px rgba(157, 80, 187, 0.25);
+    }
+
+    footer {
+      padding: 28px 8%;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-family: 'Fira Code', monospace;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 120px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .typing {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <nav>
+    <div class="logo">BATIST://</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#writeups">Writeups</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <p class="tag">&gt; initializing portfolio...</p>
+        <h1>BATIST</h1>
+        <p class="subtitle">
+          I am Puspa Shahi, a cybersecurity student focused on offensive security,
+          Linux, networking, bug hunting, and learning how systems break so they can be secured better.
+        </p>
+        <div class="typing">Cybersecurity Student | Bug Hunter</div>
+
+        <div class="buttons">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="https://www.linkedin.com/in/puspa-shahi-224987285/" target="_blank">Get in Touch on LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-top">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="terminal-body">
+          <p>$ whoami</p>
+          <p><span>batist</span></p>
+          <p>$ focus --current</p>
+          <p><span>offensive security | web security | linux</span></p>
+          <p>$ mindset</p>
+          <p><span>break → analyze → secure</span></p>
+          <p>$ status</p>
+          <p><span>learning & evolving...</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title"><span>01.</span> About Me</h2>
+      <p class="section-desc">
+        I enjoy exploring how technology works under the surface. My current path is cybersecurity,
+        with a focus on offensive security, practical labs, web vulnerabilities, and Linux-based workflows.
+        I believe the best way to secure systems is to understand how attackers think — ethically and responsibly.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>🧠 Focus</h3>
+          <p>Web security, offensive security basics, Linux, networking, and bug hunting practice.</p>
+          <div class="chips"><span class="chip">Cybersecurity</span><span class="chip">Pentesting</span></div>
+        </div>
+        <div class="card">
+          <h3>🛠️ Arsenal</h3>
+          <p>Kali Linux, terminal, Burp Suite, GitHub, TryHackMe, PortSwigger Academy, and VS Code.</p>
+          <div class="chips"><span class="chip">Kali</span><span class="chip">Terminal</span><span class="chip">Burp</span></div>
+        </div>
+        <div class="card">
+          <h3>⚡ Mindset</h3>
+          <p>Stay low. Think deep. Break silently. Learn from every system and every mistake.</p>
+          <div class="chips"><span class="chip">Learn</span><span class="chip">Break</span><span class="chip">Secure</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title"><span>02.</span> Projects</h2>
+      <p class="section-desc">
+        Add your real projects here. Start small — even beginner tools, scripts, and lab reports are better than an empty portfolio.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Recon Automation Script</h3>
+          <p>A beginner-friendly script idea for automating basic recon commands and saving outputs in organized folders.</p>
+          <div class="chips"><span class="chip">Bash</span><span class="chip">Linux</span><span class="chip">Recon</span></div>
+        </div>
+        <div class="card">
+          <h3>Web Vulnerability Notes</h3>
+          <p>A collection of practical notes from PortSwigger labs including authentication, access control, and SQL injection basics.</p>
+          <div class="chips"><span class="chip">PortSwigger</span><span class="chip">Web Security</span></div>
+        </div>
+        <div class="card">
+          <h3>TryHackMe Progress</h3>
+          <p>A personal learning log documenting solved rooms, concepts learned, commands used, and key takeaways.</p>
+          <div class="chips"><span class="chip">TryHackMe</span><span class="chip">Labs</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="writeups">
+      <h2 class="section-title"><span>03.</span> Writeups</h2>
+      <p class="section-desc">
+        Writeups show your learning process. Keep them ethical: explain the concept, the lab environment, what you learned, and how to defend against it.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Authentication Bypass Notes</h3>
+          <p>Short writeup idea explaining weak login logic, common mistakes, and secure authentication practices.</p>
+          <div class="chips"><span class="chip">Auth</span><span class="chip">Defense</span></div>
+        </div>
+        <div class="card">
+          <h3>Linux Commands I Use</h3>
+          <p>A simple post listing useful terminal commands for navigation, files, networking, and process monitoring.</p>
+          <div class="chips"><span class="chip">Linux</span><span class="chip">Terminal</span></div>
+        </div>
+        <div class="card">
+          <h3>Burp Suite Beginner Workflow</h3>
+          <p>A beginner writeup showing how to use proxy, repeater, and intruder in safe lab environments.</p>
+          <div class="chips"><span class="chip">Burp Suite</span><span class="chip">Web</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-box">
+        <h2 class="section-title"><span>04.</span> Contact</h2>
+        <p class="section-desc" style="margin-left:auto;margin-right:auto;">
+          Want to connect, collaborate, or follow my cybersecurity journey? Reach me through LinkedIn or social platforms.
+        </p>
+        <div class="buttons" style="justify-content:center;">
+          <a class="btn primary" href="https://www.linkedin.com/in/puspa-shahi-224987285/" target="_blank">LinkedIn</a>
+          <a class="btn" href="https://instagram.com/puspa_shahii" target="_blank">Instagram</a>
+          <a class="btn" href="https://www.facebook.com/batist.ricochet" target="_blank">Facebook</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 BATIST | Stay low. Think deep. Break silently.</p>
+  </footer>
+</body>
+</html>
