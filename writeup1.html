@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Writeup | BATIST</title>
+<style>
+body{
+  background:black;
+  color:#9d50bb;
+  font-family:monospace;
+  padding:40px;
+}
+h1{color:white;}
+</style>
+</head>
+<body>
+
+<h1>Account Pre-Registration & Email Ownership Bypass</h1>
+
+<p><b>Severity:</b> High / Critical</p>
+<p><b>Category:</b> Authentication • Account Security</p>
+
+<h2>Summary</h2>
+<p>
+The application allows account creation using any email without verification.
+This enables attackers to register victim emails and permanently lock them out.
+</p>
+
+<h2>Impact</h2>
+<ul>
+<li>Identity hijacking</li>
+<li>Account lockout</li>
+<li>Broken authentication</li>
+<li>Platform trust compromise</li>
+</ul>
+
+<h2>Proof of Concept</h2>
+<p>
+Attacker registers victim@gmail.com → account created instantly → no verification.
+Victim cannot register or recover account.
+</p>
+
+<h2>Fix</h2>
+<ul>
+<li>Email verification required</li>
+<li>Block login before activation</li>
+<li>Enable password reset</li>
+<li>Expire unverified accounts</li>
+</ul>
+
+</body>
+</html>
