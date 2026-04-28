@@ -473,11 +473,64 @@
       </p>
 
       <div class="grid">
-        <div class="card">
-          <h3>Authentication Bypass Notes</h3>
-          <p>Short writeup idea explaining weak login logic, common mistakes, and secure authentication practices.</p>
-          <div class="chips"><span class="chip">Auth</span><span class="chip">Defense</span></div>
-        </div>
+       <div class="card">
+  <h3>Account Pre-Registration & Email Ownership Bypass Leading to Permanent User Lockout</h3>
+
+  <p>
+    <strong>Severity:</strong> High / Critical<br>
+    <strong>Category:</strong> Authentication • Identity Management • Account Security<br>
+    <strong>Example Target:</strong> example.com
+  </p>
+
+  <p>
+    The platform allowed users to create accounts using any email address without verifying ownership.
+    No confirmation emails were sent during registration, and the password recovery system failed to deliver reset emails.
+  </p>
+
+  <p>
+    This enabled a <strong>pre-registration attack</strong>, where an attacker could register accounts using other users’ email addresses before the legitimate owner.
+    As a result, attackers could permanently claim email identities and block real users from accessing the platform.
+  </p>
+
+  <p>
+    <strong>Impact:</strong><br>
+    • Account pre-registration and identity claiming<br>
+    • Permanent user lockout (registration, login, and recovery blocked)<br>
+    • Broken authentication and recovery mechanisms<br>
+    • Platform trust compromise and potential large-scale abuse
+  </p>
+
+  <p>
+    <strong>Root Cause:</strong><br>
+    • No email ownership verification during registration<br>
+    • Email marked as “used” without validation<br>
+    • Missing confirmation and password reset email functionality<br>
+    • No recovery mechanism for unverified accounts
+  </p>
+
+  <p>
+    <strong>Proof of Concept (Summary):</strong><br>
+    An attacker registers using a victim’s email address → account is created instantly → no verification required.<br>
+    When the real user attempts to register or recover the account, access is denied and no reset email is received.<br>
+    This results in permanent lockout of the legitimate user.
+  </p>
+
+  <p>
+    <strong>Remediation:</strong><br>
+    • Implement mandatory email verification before account activation<br>
+    • Block login until verification is complete<br>
+    • Enable functional password reset email system<br>
+    • Introduce “pending verification” account state<br>
+    • Automatically remove unverified accounts after a time limit
+  </p>
+
+  <div class="chips">
+    <span class="chip">Authentication</span>
+    <span class="chip">Critical</span>
+    <span class="chip">Account Takeover</span>
+    <span class="chip">Business Logic</span>
+  </div>
+</div>
         <div class="card">
           <h3>Linux Commands I Use</h3>
           <p>A simple post listing useful terminal commands for navigation, files, networking, and process monitoring.</p>
