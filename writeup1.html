@@ -1,52 +1,127 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-<title>Writeup | BATIST</title>
-<style>
-body{
-  background:black;
-  color:#9d50bb;
-  font-family:monospace;
-  padding:40px;
-}
-h1{color:white;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Pre-Registration Writeup | BATIST</title>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1a0526 0%, #050008 45%, #000 100%);
+      color: #f5eaff;
+      font-family: monospace;
+      padding: 40px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      border: 1px solid rgba(157, 80, 187, 0.45);
+      border-radius: 20px;
+      padding: 35px;
+      background: rgba(17, 8, 28, 0.82);
+      box-shadow: 0 0 35px rgba(157, 80, 187, 0.25);
+    }
+
+    h1, h2 {
+      color: white;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #00ff66;
+    }
+
+    p, li {
+      color: #bda9c9;
+    }
+
+    .tag {
+      color: #00ff66;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #00ff66;
+      text-decoration: none;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #00ff66;
+    }
+  </style>
+
 </head>
+
 <body>
+  <div class="container">
+    <a class="back" href="index.html">← Back to Portfolio</a>
 
-<h1>Account Pre-Registration & Email Ownership Bypass</h1>
+```
+<p class="tag">BATIST://writeup</p>
 
-<p><b>Severity:</b> High / Critical</p>
-<p><b>Category:</b> Authentication • Account Security</p>
+<h1>Account Pre-Registration & Email Ownership Bypass Leading to Permanent User Lockout</h1>
 
-<h2>Summary</h2>
+<p><strong>Example Target:</strong> example.com</p>
+<p><strong>Severity:</strong> High / Critical</p>
+<p><strong>Category:</strong> Authentication • Identity Management • Account Security</p>
+
+<h2>Executive Summary</h2>
 <p>
-The application allows account creation using any email without verification.
-This enables attackers to register victim emails and permanently lock them out.
+  The platform allowed users to create accounts using any email address without verifying ownership.
+  No confirmation email was required after signup, and the password recovery system did not send reset emails.
+</p>
+
+<p>
+  This enabled a pre-registration attack where an attacker could register an account using another person’s email address before the legitimate owner.
 </p>
 
 <h2>Impact</h2>
 <ul>
-<li>Identity hijacking</li>
-<li>Account lockout</li>
-<li>Broken authentication</li>
-<li>Platform trust compromise</li>
+  <li>Account pre-registration</li>
+  <li>Email identity claiming</li>
+  <li>Permanent user lockout</li>
+  <li>Broken authentication flow</li>
+  <li>Broken password recovery flow</li>
+  <li>Platform trust compromise</li>
 </ul>
 
 <h2>Proof of Concept</h2>
 <p>
-Attacker registers victim@gmail.com → account created instantly → no verification.
-Victim cannot register or recover account.
+  An attacker registers using a victim’s email address. The account is created immediately without email verification.
+  When the real owner later tries to register, the email is already marked as used.
 </p>
 
-<h2>Fix</h2>
+<p>
+  If the victim attempts password recovery, no reset email is received. As a result, the legitimate user cannot register, login, or recover the account.
+</p>
+
+<h2>Observed Behavior</h2>
 <ul>
-<li>Email verification required</li>
-<li>Block login before activation</li>
-<li>Enable password reset</li>
-<li>Expire unverified accounts</li>
+  <li>No email verification</li>
+  <li>No confirmation email</li>
+  <li>No password reset email</li>
+  <li>Email marked as used without ownership validation</li>
+  <li>Legitimate user locked out</li>
 </ul>
 
+<h2>Expected Secure Behavior</h2>
+<ul>
+  <li>Email ownership must be verified</li>
+  <li>Login should be blocked until verification</li>
+  <li>Password reset should function properly</li>
+  <li>Unverified accounts should not permanently reserve email addresses</li>
+</ul>
+```
+
+  </div>
 </body>
 </html>
