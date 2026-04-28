@@ -467,103 +467,68 @@
     </section>
 
     <section id="writeups">
-      <h2 class="section-title"><span>03.</span> Writeups</h2>
-      <p class="section-desc">
-        Writeups show your learning process. Keep them ethical: explain the concept, the lab environment, what you learned, and how to defend against it.
-      </p>
+     <section id="writeups">
+  <h2 class="section-title"><span>03.</span> Writeups</h2>
+  <p class="section-desc">
+    Security writeups based on responsible testing and real vulnerability findings. Sensitive target details are anonymized.
+  </p>
 
-      <div class="grid">
-        <a href="writeup1.html" style="text-decoration:none;">
+  <div class="grid">
+
+```
+<a href="writeup1.html" style="text-decoration:none;">
   <div class="card">
     <h3>Account Pre-Registration & Email Ownership Bypass</h3>
 
     <p>
-      Discovered a critical authentication flaw allowing attackers to pre-register victim emails
-      and permanently lock legitimate users out.
+      Found a critical authentication issue where users could create accounts using any email address without verifying ownership.
     </p>
 
-    <p><b>Severity:</b> High / Critical</p>
+    <p>
+      <strong>Severity:</strong> High / Critical<br>
+      <strong>Category:</strong> Authentication • Account Security
+    </p>
 
-    <p><b>Click to view full report →</b></p>
+    <p>
+      <strong>Impact:</strong> Email identity claiming, account pre-registration, broken recovery flow, and permanent user lockout.
+    </p>
 
+    <p><strong>Click to view full report →</strong></p>
+
+    <div class="chips">
+      <span class="chip">Authentication</span>
+      <span class="chip">Critical</span>
+      <span class="chip">Account Security</span>
+    </div>
   </div>
-</a><a>
-       <div class="card">
 </a>
-         <h3>Account Pre-Registration & Email Ownership Bypass Leading to Permanent User Lockout</h3>
 
+<div class="card">
+  <h3>Linux Commands I Use</h3>
   <p>
-    <strong>Severity:</strong> High / Critical<br>
-    <strong>Category:</strong> Authentication • Identity Management • Account Security<br>
-    <strong>Example Target:</strong> example.com
+    A simple post listing useful terminal commands for navigation, files, networking, and process monitoring.
   </p>
-
-  <p>
-    The platform allowed users to create accounts using any email address without verifying ownership.
-    No confirmation emails were sent during registration, and the password recovery system failed to deliver reset emails.
-  </p>
-
-  <p>
-    This enabled a <strong>pre-registration attack</strong>, where an attacker could register accounts using other users’ email addresses before the legitimate owner.
-    As a result, attackers could permanently claim email identities and block real users from accessing the platform.
-  </p>
-
-  <p>
-    <strong>Impact:</strong><br>
-    • Account pre-registration and identity claiming<br>
-    • Permanent user lockout (registration, login, and recovery blocked)<br>
-    • Broken authentication and recovery mechanisms<br>
-    • Platform trust compromise and potential large-scale abuse
-  </p>
-
-  <p>
-    <strong>Root Cause:</strong><br>
-    • No email ownership verification during registration<br>
-    • Email marked as “used” without validation<br>
-    • Missing confirmation and password reset email functionality<br>
-    • No recovery mechanism for unverified accounts
-  </p>
-
-  <p>
-    <strong>Proof of Concept (Summary):</strong><br>
-    An attacker registers using a victim’s email address → account is created instantly → no verification required.<br>
-    When the real user attempts to register or recover the account, access is denied and no reset email is received.<br>
-    This results in permanent lockout of the legitimate user.
-  </p>
-
-
   <div class="chips">
-    <span class="chip">Authentication</span>
-    <span class="chip">Critical</span>
-    <span class="chip">Account Takeover</span>
-    <span class="chip">Business Logic</span>
+    <span class="chip">Linux</span>
+    <span class="chip">Terminal</span>
   </div>
 </div>
-        <div class="card">
-          <h3>Linux Commands I Use</h3>
-          <p>A simple post listing useful terminal commands for navigation, files, networking, and process monitoring.</p>
-          <div class="chips"><span class="chip">Linux</span><span class="chip">Terminal</span></div>
-        </div>
-        <div class="card">
-          <h3>Burp Suite Beginner Workflow</h3>
-          <p>A beginner writeup showing how to use proxy, repeater, and intruder in safe lab environments.</p>
-          <div class="chips"><span class="chip">Burp Suite</span><span class="chip">Web</span></div>
-        </div>
-      </div>
-    </section>
 
-    <section id="contact">
-      <div class="contact-box">
-        <h2 class="section-title"><span>04.</span> Contact</h2>
-        <p class="section-desc" style="margin-left:auto;margin-right:auto;">
-          Want to connect, collaborate, or follow my cybersecurity journey? Reach me through LinkedIn or social platforms.
-        </p>
-        <div class="buttons" style="justify-content:center;">
-          <a class="btn primary" href="https://www.linkedin.com/in/puspa-shahi-224987285/" target="_blank">LinkedIn</a>
-          <a class="btn" href="https://instagram.com/puspa_shahii" target="_blank">Instagram</a>
-          <a class="btn" href="https://www.facebook.com/batist.ricochet" target="_blank">Facebook</a>
-        </div>
-      </div>
+<div class="card">
+  <h3>Burp Suite Beginner Workflow</h3>
+  <p>
+    A beginner writeup showing how to use proxy, repeater, and request analysis in safe lab environments.
+  </p>
+  <div class="chips">
+    <span class="chip">Burp Suite</span>
+    <span class="chip">Web</span>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
     </section>
   </main>
 
